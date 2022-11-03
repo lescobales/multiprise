@@ -1,0 +1,10 @@
+<div class="container" style="width:75%">
+<div class="columns">
+  <mltp-home-features-card
+    *ngFor='let feature of listPrise' 
+    class="column col-3 col-lg-6" 
+    (onONOFFChange)="onONOFFChange($event)"
+    (onNameChange)="onNameChange($event)"
+    [id]="feature.id">
+  </mltp-home-features-card>
+</div>

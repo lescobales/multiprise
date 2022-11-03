@@ -1,0 +1,72 @@
+<form novalidate [formGroup]="selectForm" (ngSubmit)="submit()">
+
+
+    <h1>Select parameter</h1>
+
+    <div>
+        <label class="form-label" for="changeName" (click)="changeName()">
+            <h2 style="padding-left: 5px">Nom de la prise &#9999;</h2>
+        </label>
+        
+    </div>
+    <div *ngIf="isNameChange">
+            <input class="col-6" type="text" #name placeholder="Nom" id="changeName" formControlName="name">
+            <button class="btn btn-action s-circle" 
+                    (click)="setName(name.value)" 
+                    style="padding-left: 5px;">
+              <i class="icon icon-check col-2"></i>
+            </button>
+          </div>
+
+    <div class="card-image">
+        <h3>{{prise.name}}</h3>
+    </div>
+    <div class="col-4 col-mx-auto">
+        <img src="../../../../assets/img/prise.png" class="img-responsive">
+    </div>
+
+
+    <div class="col-4 col-mx-auto columns col-oneline" style="position:relative">
+
+        <div class="text-dark column col-6" 
+              
+             [ngClass]="{'text-success':isActive}"
+             
+             >ON/OFF
+             <div class="form-group">
+            <label class="form-switch col-1">
+                <input class="form-control"
+                 formControlName="onOff"
+                type="checkbox" 
+                id="onOff" 
+                (change)="setOnOff()" 
+                >
+                <i class="form-icon"></i>
+            </label>
+            </div>
+        </div>
+        <div class="column col-auto col-6" [innerHTML]="unicode" id="unicode"></div>
+    </div>
+
+    <div class="col-4 col-mx-auto col-md-auto col-lg-auto col-xl-auto" style="position: relative">
+        <label class="form-label">
+            <h3>Type</h3>
+        </label>
+        <form class="form-group">
+            <div *ngFor="let type of typeList">
+                <label>
+                    <input type="radio" 
+                    [formControlName]="'type'"
+                    [name]="'type'"
+                    id="'type'" 
+                    class="filled-in"
+                    [value]="type"
+                    (change)="setTypeRadio(selectForm.value)"
+                    >{{type}}
+                    <i class="form-icon"></i>
+                </label>
+            </div>
+        </form>
+    </div>
+</form>
+<pre>{{selectForm.value | json}}</pre>

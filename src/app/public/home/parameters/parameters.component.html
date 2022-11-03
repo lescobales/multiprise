@@ -1,0 +1,38 @@
+<div [formGroup]="parameterForm">
+	<div class="container" style="width: 75%">
+		<div class="card">
+			<div class="columns">
+				<div class="column col-6">
+					<mltp-select 
+					 formGroupName="select"
+					 (changeCycle)="onChangeCycle($event)"
+					 >
+					</mltp-select>
+				</div>
+
+				<div class="column col-6">
+					<mltp-cycle 
+					formGroupName="cycle" 
+					*ngIf="isCycle">
+				    </mltp-cycle>
+
+					<mltp-temperature
+					formGroupName="temperature" 
+					*ngIf="isTemperature">
+				    </mltp-temperature>
+
+					<mltp-humidite
+					formGroupName="humidite" 
+					*ngIf="isHumidite">
+				    </mltp-humidite>
+
+					<mltp-date
+					formGroupName="date" 
+					*ngIf="isDate">
+				    </mltp-date>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

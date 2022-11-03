@@ -1,0 +1,103 @@
+<form [formGroup]="humiditeForm" class="form-group" (ngSubmit)="submit()">
+    <h2 class="text-center">Programation de l'humidité</h2>
+    <div>
+
+        <div style="width:100%; padding-bottom: 20px;padding-top: 50px;">
+            <div style="display:flex">
+                
+                <div style="display:flex; width:100%">
+                <h6 style="width:30%">Actif supérieur à</h6>
+                    <input type="radio" 
+                    formControlName="radio"
+                    [value]="'actifSup'" 
+                    class="form-control filled-in"  
+                    (change)="setSensor(humiditeForm.value)">
+
+                    <input type="text" style="width:20%"
+                    formControlName="actifSup" 
+                    id="actifSup" 
+                    class="form-control">
+                    <i class="form-icon"></i>
+                </div>
+            </div>
+        </div>
+
+            <div style="width:100%; padding-bottom: 20px;">
+                <div style="display:flex">
+                    
+                    <div style="display:flex; width:100%">
+                    <h6 style="width:30%;">Actif inférier à</h6>
+                        <input type="radio" 
+                        formControlName="radio"
+                        [value]="'actifInf'"
+                        class="form-control filled-in"  
+                        (change)="setSensor(humiditeForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifInf"  
+                        id="actifInf" 
+                        class="form-control">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width:100%; padding-bottom: 20px;">
+                <div style="display:flex">
+                    
+                    <div style="display:flex;width:100%">
+                    <h6 style="width:30%;">Actif entre</h6>
+                        <input type="radio" 
+                        formControlName="radio"  
+                        [value]="'actifEntre'"
+                        class="form-control filled-in"  
+                        (change)="setSensor(humiditeForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifEntreMin"  
+                        id="actifEntreMin" 
+                        class="filled-in">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifEntreMax"  
+                        id="actifEntreMax" 
+                        class="filled-in">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="width:100%; padding-bottom: 20px;">
+                <div style="display:flex">
+                    <div style="display:flex;width:100%">
+                    <h6 style="width:30%;">Inactif entre</h6>
+                        <input type="radio" 
+                        formControlName="radio"  
+                        [value]="'inactifEntre'"
+                        class="form-control filled-in"  
+                        (change)="setSensor(humiditeForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="inactifEntreMin"  
+                        id="inactifEntreMin" 
+                        class="filled-in">
+
+                        <input type="text" style="width:20%"
+                        formControlName="inactifEntreMax"  
+                        id="inactifEntreMax" 
+                        class="filled-in">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>  
+    </div>
+    <p class="text-center" style="padding-top: 20px">
+            <button type="submit" 
+            class="btn" 
+            [disabled]="!humiditeForm.valid" 
+            >
+                Valider
+            </button>
+        </p>
+</form>
+<pre>{{humiditeForm.value | json}}</pre>

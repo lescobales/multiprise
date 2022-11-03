@@ -1,0 +1,5 @@
+@onOffMode => adresse ON/OFF mode
+@nameMode => adresse nouveau nom
+@cycleMode = adresse changement cycle
+
+priseName:[nom_de_la_prise]

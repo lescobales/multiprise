@@ -1,0 +1,54 @@
+<form [formGroup]="cycleForm" (ngSubmit)="submit()">
+
+        <h2 class="text-center" >Programation du cycle de fonctionnement</h2>
+
+        <h3 style="padding-top:50px">Temps ON</h3>
+        <div style="display: flex" class="text-center">
+
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Jour</label>
+                <input class="form-control" id="jOn" type="text" style="width:100%" formControlName="jOn" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Heure</label>
+                <input class="form-control" type="text" id="hOn" style="width:100%" formControlName="hOn" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Minute</label>
+                <input class="form-control" type="text" id="mOn" style="width:100%" formControlName="mOn" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Seconde</label>
+                <input class="form-control" type="text" id="sOn" style="width:100%" formControlName="sOn" maxlength="2">
+            </div>
+        </div>
+        <h3 style="padding-top:50px">Temps OFF</h3>
+        <div style="display: flex" class="text-center">
+
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Jour</label>
+                <input class="form-control" type="text" id="jOff" style="width:100%" formControlName="jOff" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Heure</label>
+                <input class="form-control" type="text" id="hOff" style="width:100%" formControlName="hOff" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Minute</label>
+                <input class="form-control" type="text" id="mOff" style="width:100%" formControlName="mOff" maxlength="2">
+            </div>
+            <div style="display:block; width: 25%; padding: 2px" class="form-group">
+                <label class="default-label">Seconde</label>
+                <input class="form-control" type="text" id="sOff" style="width:100%" formControlName="sOff" maxlength="2">
+            </div>
+        </div>
+        <p class="text-center" style="padding-top: 20px">
+            <button type="submit" 
+            class="btn" 
+            [disabled]="!cycleForm.valid" 
+            >
+                Valider
+            </button>
+        </p>
+</form>
+<pre>{{cycleForm.value | json}}</pre>

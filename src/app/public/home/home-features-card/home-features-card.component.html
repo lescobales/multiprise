@@ -1,0 +1,59 @@
+<form [formGroup]="homeForm">
+<div class="card" style="border-radius: 1em ; border: solid">
+  <div class="container">
+    <div class="columns">
+      <div class="column col-6">
+        <div class="card-title h5">
+          <label (click)="setIsChangeName()" for="changeName">
+            {{name}} &#9999;     
+          </label>
+          
+          <div *ngIf="isNameChange">
+            <input class="col-6" type="text" #name placeholder="Nom" id="changeName">
+            <button class="btn btn-action s-circle" (click)="setName(name.value)">
+              <i class="icon icon-check col-2"></i>
+            </button>
+          </div>
+        </div> 
+      <div class="card-image" (dblclick)="goToParameter()"
+           style="margin-left: auto;margin-right: auto;width: 70%">
+          <img src="../../../../assets/img/prise.png" class="img-responsive">
+      </div>
+        <div class="container">
+          <div class="columns">
+            <div class="column col-4 col-mx-auto">
+              <div style="margin-left: auto;margin-right: auto">
+                <p class="text-dark" 
+                  style="font-size: x-small;" 
+                  [ngClass]="{'text-success':isActive}"
+                  >ON/OFF
+                  <label class="form-switch">
+                    <input id="onOff" type="checkbox" (change)="setOnOff()" formControlName="onOff">
+                    <i class="form-icon"></i>    
+                  </label>
+                </p>
+              </div>
+            </div>
+            <div class="column col-4">
+              <span [innerHTML]="unicode"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column col-6" *ngIf="isPriseChange" style="position: relative">
+        <h5 style="text-align:center">Actions réalisées</h5>
+        <button class="btn btn-action s-circle" (click)="validPrise()"
+                style="position: absolute; bottom: 0; right: 0; margin-right: 3px; margin-bottom: 3px">
+        <i class="icon icon-check col-2"></i>
+        </button>
+        <label class="label label-primary">{{msgInfoONOFF}}</label>
+        <label class="label label-primary">{{msgInfoName}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<!-----Crée un espace entre les lignes ---->
+<div class="columns col-12">
+<p></p>
+</div>
