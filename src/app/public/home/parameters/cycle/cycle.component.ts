@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,8 @@ export class CycleComponent implements OnInit {
   @Input() formGroupName: string;
   cycleForm: FormGroup;
 
+  @Output() sendValue = new EventEmitter<string>();
+
   constructor(private rootFormGroup: FormGroupDirective) { }
   
   ngOnInit(): void {
@@ -17,7 +19,7 @@ export class CycleComponent implements OnInit {
   }
 
   submit(){
-    console.log('submit')
+    this.sendValue.emit('cycle')
   }
 
 }

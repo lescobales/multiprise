@@ -2,11 +2,19 @@
     <div>
         <h1>Programation du jour de fonctionnement</h1>
         <div style="display:flex" class="form-group">
-            <h5 style="width: 10%">On</h5>
+            <div style="width: 50px;;height:40px">
+            <small style="width: 10%; margin: auto">On/Off</small>
+                <label class="form-switch">
+                    
+                        <input type="checkbox" 
+                        formControlName="onOff" 
+                        class="form-switch filled-in" >
+                        <i class="form-icon"></i>
+                </label>
+            </div>
             <select formControlName="jOn" 
                     class="form-select" 
-                    style="width: 30%"
-                    (change)="getDay()">
+                    style="width: 20%;height:40px">
                 <option value="lundi">Lundi</option>
                 <option value="mardi">Mardi</option>
                 <option value="mercredi">Mercredi</option>
@@ -15,28 +23,9 @@
                 <option value="samedi">Samedi</option>
                 <option value="dimanche">Dimanche</option>
             </select>à
-            <input formControlName="hOn" style="width: 20%">H
-            <input formControlName="mOn" style="width: 20%">m
+            <input formControlName="hOn" style="width: 20%;height:40px">H
+            <input formControlName="mOn" style="width: 20%;height:40px">m
         </div>
-
-        <div style="display:flex" class="form-group">
-            <h5 style="width: 10%">Off</h5>
-            <select formControlName="jOff" 
-                    class="form-select" 
-                    style="width: 30%"
-                    (change)="getDay()">
-                <option value="lundi">Lundi</option>
-                <option value="mardi">Mardi</option>
-                <option value="mercredi">Mercredi</option>
-                <option value="jeudi">Jeudi</option>
-                <option value="vendredi">Vendredi</option>
-                <option value="samedi">Samedi</option>
-                <option value="dimanche">Dimanche</option>
-            </select>à
-            <input formControlName="hOff" style="width: 20%">H
-            <input formControlName="mOff" style="width: 20%">m
-        </div>
-        <label *ngIf="isSameDate"><small style="color: red">Les dates sont identiques</small></label>
         <p class="text-center" style="padding-top: 20px">
             <button type="submit" 
             class="btn" 

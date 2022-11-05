@@ -40,6 +40,7 @@ export class SelectComponent implements OnInit {
       this.cycleChange(this.prise.type)
       this.selectForm.patchValue({onOff: this.prise.isActive})
       this.selectForm.patchValue({name:this.prise.name})
+      this.selectForm.patchValue({id:this.prise.id})
     }
   }
   

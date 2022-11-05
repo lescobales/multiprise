@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { PriseService } from 'src/app/core/services/prise.service';
 
 @Component({
   selector: 'mltp-date',
@@ -11,6 +12,8 @@ export class DateComponent implements OnInit {
   @Input() formGroupName: string;
   dateForm: FormGroup;
 
+  @Output() sendValue = new EventEmitter<string>();
+
   isSameDate: boolean = false
   constructor(private rootFormGroup: FormGroupDirective) { }
 
@@ -19,23 +22,8 @@ export class DateComponent implements OnInit {
 
   }
 
-  compareDate() {
-    this.isSameDate=false
-    if(this.dayOn?.value == this.dayOff?.value) {
-      if(this.hOn?.value == this.hOff?.value){
-        if(this.mOn?.value == this.mOff?.value) {
-          this.isSameDate=true
-        }
-      }
-    }
-  }
-
   submit() {
-    this.compareDate()
-  }
-
-  getDay() {
-
+    this.sendValue.emit('date')
   }
 
   get dayOn() {
@@ -50,19 +38,9 @@ export class DateComponent implements OnInit {
     return this.dateForm.get('mOn');
     
   }
-  get dayOff() {
-    return this.dateForm.get('jOff');
+
+  get onOff() {
+    return this.dateForm.get('onOff');
     
   }
-
-  get hOff() {
-    return this.dateForm.get('hOff');
-    
-  }
-
-  get mOff() {
-    return this.dateForm.get('mOff');
-    
-  }
-
 }

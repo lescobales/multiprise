@@ -62,8 +62,12 @@ export class PriseService{
             
   }
 
-  sendValue(adresse: string, data: string):Observable<Prise>{
-    console.log(`sendValue:`, data);
+  getValue(value: any){
+    this.sendValue('api/multiprise', value).subscribe(() => {})
+  }
+
+  sendValue(adresse: string, data: any):Observable<Prise>{
+    //console.log(`sendValue:`, data);
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
       };

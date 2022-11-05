@@ -5,29 +5,32 @@
 				<div class="column col-6">
 					<mltp-select 
 					 formGroupName="select"
-					 (changeCycle)="onChangeCycle($event)"
-					 >
+					 (changeCycle)="onChangeCycle($event)">
 					</mltp-select>
 				</div>
 
 				<div class="column col-6">
 					<mltp-cycle 
-					formGroupName="cycle" 
+					formGroupName="cycle"
+					(sendValue)="sendValue($event)"
 					*ngIf="isCycle">
 				    </mltp-cycle>
 
 					<mltp-temperature
-					formGroupName="temperature" 
+					formGroupName="temperature"
+					(sendValue)="sendValue($event)" 
 					*ngIf="isTemperature">
 				    </mltp-temperature>
 
 					<mltp-humidite
-					formGroupName="humidite" 
+					formGroupName="humidite"
+					(sendValue)="sendValue($event)"
 					*ngIf="isHumidite">
 				    </mltp-humidite>
 
 					<mltp-date
 					formGroupName="date" 
+					(sendValue)="sendValue($event)"
 					*ngIf="isDate">
 				    </mltp-date>
 					

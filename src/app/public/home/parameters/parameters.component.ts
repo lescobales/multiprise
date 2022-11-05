@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, MaxValidator, Validators } from '@angular/forms';
+import { PriseService } from 'src/app/core/services/prise.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ParametersComponent implements OnInit {
 
   parameterForm :FormGroup
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private priseService : PriseService) { }
   ngOnInit(): void {
     this.parameterForm = this.fb.group({
       cycle: this.fb.group({
@@ -60,61 +62,36 @@ export class ParametersComponent implements OnInit {
         ]]
       }),
       select: this.fb.group({
+        id: [],
         type: [],
         onOff: [],
         name: []
       }),
       temperature: this.fb.group({
-        sensorId: ['',[
-          Validators.required
-        ]],
+        sensorId: [],
+        radio: [],
 
-        actifMin1: ['',[
+        actifSup: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]],
-        actifMax1: ['',[
+        actifInf: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]],
-        actifEntreMin1: ['',[
+        actifEntreMin: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]],
-        actifEntreMax1: ['',[
+        actifEntreMax: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]],
-        inactifEntreMin1: ['',[
+        inactifEntreMin: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]],
-        inactifEntreMax1: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-
-        actifMin2: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-        actifMax2: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-        actifEntreMin2: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-        actifEntreMax2: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-        inactifEntreMin2: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{2,3}$')
-        ]],
-        inactifEntreMax2: ['',[
+        inactifEntreMax: ['',[
           Validators.required,
           Validators.pattern('^[0-9]{2,3}$')
         ]]
@@ -157,44 +134,32 @@ export class ParametersComponent implements OnInit {
         mOn: ['',[
           Validators.required
         ]],
-
-        jOff: ['',[
-          Validators.required
-        ]],
-        hOff: ['',[
-          Validators.required
-        ]],
-        mOff: ['',[
+        onOff: ['',[
           Validators.required
         ]]
       })
     });  
   }
 
-  onChangeCycle(event: any) {
-    switch (event) {
-      case 'cycle':
-        this.changeMode(event)
-        break;
-      case 'temperature':
-        this.changeMode(event)
-        break;
-        case 'humidite':
-          this.changeMode(event)
-          break;
-        case 'date':
-          this.changeMode(event)
-          break;
-    }
+  sendValue(event:any){
+    
+    let value = { ...this.parameterForm.controls['select'].value,
+                  ...this.parameterForm.controls[event].value};
+    this.priseService.getValue(value)
   }
+
   
-  changeMode(mode: string) {
-   let isMode = this.listMode.map((acc) => {acc.mode == mode ? acc.checked = true : acc.checked = false;
-                                              return acc.checked})                             
-  this.isCycle = isMode[0]
-  this.isTemperature = isMode[1]
-  this.isDate = isMode[2]
-  this.isHumidite = isMode[3]
-  }
+
+  onChangeCycle(mode: any) {
+    let isMode = this.listMode.map((acc) => {acc.mode == mode ? acc.checked = true : acc.checked = false;
+      return acc.checked})                             
+    this.isCycle = isMode[0]
+    this.isTemperature = isMode[1]
+    this.isDate = isMode[2]
+    this.isHumidite = isMode[3]
 }
+}
+  
+ 
+
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { PriseService } from 'src/app/core/services/prise.service';
 import { SensorTemperature } from 'src/app/shared/models/sensor';
@@ -12,6 +12,8 @@ export class TemperatureComponent implements OnInit {
 
   @Input() formGroupName: string;
   temperatureForm: FormGroup;
+
+  @Output() sendValue = new EventEmitter<string>();
   
   constructor(private rootFormGroup: FormGroupDirective,
               private priseService: PriseService) { }
@@ -19,54 +21,57 @@ export class TemperatureComponent implements OnInit {
   ngOnInit(): void {
     this.temperatureForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
     this.temperatureForm.patchValue({sensorId:'sensor1'})
-    this.disabledSensorInput()
+    this.temperatureForm.patchValue({radio:'actifSup'})
+    this.disabledSensorInput('actifSup')
     
   }
 
-  disabledSensorInput () {
-    if(this.sensorTempState?.value == 'sensor1') {
-      this.temperatureForm.controls['actifMin2'].disable();
-      this.temperatureForm.controls['actifMax2'].disable();
-      this.temperatureForm.controls['actifEntreMin2'].disable();
-      this.temperatureForm.controls['actifEntreMax2'].disable();
-      this.temperatureForm.controls['inactifEntreMin2'].disable();
-      this.temperatureForm.controls['inactifEntreMax2'].disable();
-
-      this.temperatureForm.controls['actifMin1'].enable();
-      this.temperatureForm.controls['actifMax1'].enable();
-      this.temperatureForm.controls['actifEntreMin1'].enable();
-      this.temperatureForm.controls['actifEntreMax1'].enable();
-      this.temperatureForm.controls['inactifEntreMin1'].enable();
-      this.temperatureForm.controls['inactifEntreMax1'].enable();
-
-    } else if(this.sensorTempState?.value == 'sensor2'){
-      this.temperatureForm.controls['actifMin1'].disable();
-      this.temperatureForm.controls['actifMax1'].disable();
-      this.temperatureForm.controls['actifEntreMin1'].disable();
-      this.temperatureForm.controls['actifEntreMax1'].disable();
-      this.temperatureForm.controls['inactifEntreMin1'].disable();
-      this.temperatureForm.controls['inactifEntreMax1'].disable();
-
-      this.temperatureForm.controls['actifMin2'].enable();
-      this.temperatureForm.controls['actifMax2'].enable();
-      this.temperatureForm.controls['actifEntreMin2'].enable();
-      this.temperatureForm.controls['actifEntreMax2'].enable();
-      this.temperatureForm.controls['inactifEntreMin2'].enable();
-      this.temperatureForm.controls['inactifEntreMax2'].enable();
-
-    }
+  setSensor(sensor: any) {
+    //console.log(sensor.radio)
+    this.disabledSensorInput(sensor.radio)
   }
 
-  setSensor(sensor: any) {
-    console.log(this.sensorTempState?.value)
-    this.disabledSensorInput()
+  disabledSensorInput(property: string) {
+    if(this.mode?.value == property){
+      for (const elmt in this.temperatureForm.value) {
+        if(elmt != 'radio'){
+          if(elmt == 'actifEntre'){
+            this.temperatureForm.controls['inactifEntreMin'].disable();
+            this.temperatureForm.controls['inactifEntreMax'].disable();
+          }
+          else if(elmt == 'inactifEntre'){
+            this.temperatureForm.controls['actifEntreMin'].disable();
+            this.temperatureForm.controls['actifEntreMax'].disable();
+          }
+          
+          else 
+            this.temperatureForm.controls[elmt].disable();
+        }
+      }
+    }
+    if(property == 'actifEntre'){
+      this.temperatureForm.controls['actifEntreMin'].enable();
+      this.temperatureForm.controls['actifEntreMax'].enable();
+    }
+    else if(property == 'inactifEntre'){
+      this.temperatureForm.controls['inactifEntreMin'].enable();
+      this.temperatureForm.controls['inactifEntreMax'].enable();
+    }else {
+      this.temperatureForm.controls[property].enable();
+    }
+    this.temperatureForm.controls['sensorId'].enable();
   }
 
   submit(){
-    console.log('temperature')
+    this.sendValue.emit('temperature')
   }
   get sensorTempState() {
     return this.temperatureForm.get('sensorId');
+    
+  }
+
+  get mode() {
+    return this.temperatureForm.get('radio');
     
   }
 

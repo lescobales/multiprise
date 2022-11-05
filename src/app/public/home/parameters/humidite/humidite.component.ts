@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 export class HumiditeComponent implements OnInit {
   @Input() formGroupName: string;
   humiditeForm: FormGroup;
+
+  @Output() sendValue = new EventEmitter<string>();
 
   constructor(private rootFormGroup: FormGroupDirective) { }
 
@@ -54,7 +56,7 @@ export class HumiditeComponent implements OnInit {
   }
 
   submit() {
-    
+    this.sendValue.emit('humidite')
   }
 
   get sensor() {

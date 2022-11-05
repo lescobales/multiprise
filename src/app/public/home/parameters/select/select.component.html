@@ -1,27 +1,22 @@
 <form novalidate [formGroup]="selectForm" (ngSubmit)="submit()">
 
-
-    <h1>Select parameter</h1>
-
-    <div>
-        <label class="form-label" for="changeName" (click)="changeName()">
-            <h2 style="padding-left: 5px">Nom de la prise &#9999;</h2>
-        </label>
-        
-    </div>
-    <div *ngIf="isNameChange">
-            <input class="col-6" type="text" #name placeholder="Nom" id="changeName" formControlName="name">
-            <button class="btn btn-action s-circle" 
-                    (click)="setName(name.value)" 
-                    style="padding-left: 5px;">
-              <i class="icon icon-check col-2"></i>
-            </button>
-          </div>
-
-    <div class="card-image">
-        <h3>{{prise.name}}</h3>
-    </div>
     <div class="col-4 col-mx-auto">
+        <div class="card-image">
+            <label class="form-label" 
+                    for="changeName" 
+                    (click)="changeName()">
+                    <h3>{{prise.name}} &#9999;</h3>
+            </label>
+
+            <div *ngIf="isNameChange">
+                <input class="col-6" type="text" #name placeholder="Nom" id="changeName" formControlName="name">
+                <button class="btn btn-action s-circle" 
+                        (click)="setName(name.value)" 
+                        style="padding-left: 5px;">
+                <i class="icon icon-check col-2"></i>
+                </button>
+            </div>
+        </div>
         <img src="../../../../assets/img/prise.png" class="img-responsive">
     </div>
 

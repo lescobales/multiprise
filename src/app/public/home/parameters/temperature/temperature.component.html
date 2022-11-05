@@ -1,4 +1,4 @@
-<form [formGroup]="temperatureForm">
+<form [formGroup]="temperatureForm" (ngSubmit)="submit()">
     <h2 class="text-center">Programation de la température</h2>
     <div>
         <!----------------Sensor 1----------------->
@@ -9,149 +9,123 @@
                     formControlName="sensorId" 
                     [value]="'sensor1'" 
                     id="sensor1" 
-                    class="filled-in"  
-                    (change)="setSensor(temperatureForm.value)">
+                    class="form-control">
+                    <i class="form-icon"></i>
+                </div>
+                <h3 style="padding-left:50px">Sensor 2</h3>
+                <div style="margin:auto;position:relative;bottom:5px;padding-left:10px">
+                    <input type="radio" 
+                    formControlName="sensorId" 
+                    [value]="'sensor2'" 
+                    id="sensor2" 
+                    class="form-control">
                     <i class="form-icon"></i>
                 </div>
             </div>
             
-            
-            <div style="display: flex" class="text-center">
-                
+        <div style="width:100%">  
+            <div style="width:100%; padding-bottom: 20px;padding-top: 50px;">
+                <div style="display:flex">
                     
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label">Actif supérieur à
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifMin1" 
-                                style="width:100%" 
-                                formControlName="actifMin1">
-                        </label>
-                    </div>   
-                    
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label">Actif inférieur à
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifMax1" 
-                                style="width:100%" 
-                                formControlName="actifMax1">
-                        </label>
-                    </div>
+                    <div style="display:flex; width:100%">
+                    <h6 style="width:30%">Actif supérieur à</h6>
+                        <input type="radio" 
+                        formControlName="radio"
+                        [value]="'actifSup'" 
+                        class="form-control filled-in"  
+                        (change)="setSensor(temperatureForm.value)">
 
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label" >Actif entre
-                            <div style="display:flex">
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifEntreMin1" 
-                                style="width:100%" 
-                                formControlName="actifEntreMin1">-
-                                <input class="form-control" 
-                                type="text" 
-                                id="actifEntreMax1" 
-                                style="width:100%" 
-                                formControlName="actifEntreMax1">
-                            </div> 
-                        </label>
+                        <input type="text" style="width:20%"
+                        formControlName="actifSup" 
+                        id="actifSup" 
+                        class="form-control">
+                        <i class="form-icon"></i>
                     </div>
-
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label" >Inactif entre
-                            <div style="display:flex">
-                            <input class="form-control" 
-                                type="text" 
-                                id="inactifEntreMin1" 
-                                style="width:100%" 
-                                formControlName="inactifEntreMin1" 
-                                maxlength="2">-
-                                <input class="form-control" 
-                                type="text" 
-                                id="inactifEntreMax1" 
-                                style="width:100%" 
-                                formControlName="inactifEntreMax1">
-                            </div> 
-                        </label>
-                    </div>  
-                    
+                </div>
             </div>
+
+            <div style="width:100%">
+                <div style="display:flex">
+                    
+                    <div style="display:flex; width:100%;padding-bottom: 20px">
+                    <h6 style="width:30%">Actif inférieur à</h6>
+                        <input type="radio" 
+                        formControlName="radio"
+                        [value]="'actifInf'" 
+                        class="form-control filled-in"  
+                        (change)="setSensor(temperatureForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifInf" 
+                        id="actifInf" 
+                        class="form-control">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>
+                
+            <div style="width:100%;">
+                <div style="display:flex">
+                    
+                    <div style="display:flex;width:100%;padding-bottom: 20px">
+                    <h6 style="width:30%;">Actif entre</h6>
+                        <input type="radio" 
+                        formControlName="radio"  
+                        [value]="'actifEntre'"
+                        class="form-control filled-in"  
+                        (change)="setSensor(temperatureForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifEntreMin"  
+                        id="actifEntreMin" 
+                        class="filled-in">
+
+                        <input type="text" style="width:20%"
+                        formControlName="actifEntreMax"  
+                        id="actifEntreMax" 
+                        class="filled-in">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>     
+                      
+            <div style="width:100%; padding-bottom: 20px;">
+                <div style="display:flex">
+                    <div style="display:flex;width:100%">
+                    <h6 style="width:30%;">Inactif entre</h6>
+                        <input type="radio" 
+                        formControlName="radio"  
+                        [value]="'inactifEntre'"
+                        class="form-control filled-in"  
+                        (change)="setSensor(temperatureForm.value)">
+
+                        <input type="text" style="width:20%"
+                        formControlName="inactifEntreMin"  
+                        id="inactifEntreMin" 
+                        class="filled-in">
+
+                        <input type="text" style="width:20%"
+                        formControlName="inactifEntreMax"  
+                        id="inactifEntreMax" 
+                        class="filled-in">
+                        <i class="form-icon"></i>
+                    </div>
+                </div>
+            </div>      
+                    
+        </div>
+                    
+
+                      
+                    
+            
 
 
 
                     <!----------------Sensor 2----------------->
-            <div style="display:inline-flex">
-                <h3>Sensor 2</h3>
-                <div style="margin: auto;position:relative;bottom:5px;padding-left:10px">
-                    <input type="radio" 
-                    formControlName="sensorId" 
-                    [value]="'sensor2'"
-                    id="sensor2" 
-                    class="filled-in"  
-                    (change)="setSensor(temperatureForm.value)">
-                    <i class="form-icon"></i>
-                </div>
-            </div>
+             
+                    
             
-            
-            <div style="display: flex" class="text-center">
-                
-                    
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label">Actif supérieur à
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifMin1" 
-                                style="width:100%" 
-                                formControlName="actifMin2">
-                        </label>
-                    </div>   
-                    
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label">Actif inférieur à
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifMax2" 
-                                style="width:100%" 
-                                formControlName="actifMax2">
-                        </label>
-                    </div>
-
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label" >Actif entre
-                            <div style="display:flex">
-                            <input class="form-control" 
-                                type="text" 
-                                id="actifEntreMin" 
-                                style="width:100%" 
-                                formControlName="actifEntreMin2" 
-                                maxlength="2">-
-                                <input class="form-control" 
-                                type="text" 
-                                id="actifEntreMax" 
-                                style="width:100%" 
-                                formControlName="actifEntreMax2">
-                            </div> 
-                        </label>
-                    </div>
-
-                    <div style="display: block; padding: 3px" class="form-group input-icon">                    
-                        <label class="default-label" >Inactif entre
-                            <div style="display:flex">
-                            <input class="form-control" 
-                                type="text" 
-                                id="inactifEntreMin" 
-                                style="width:100%" 
-                                formControlName="inactifEntreMin2">-
-                                <input class="form-control" 
-                                type="text" 
-                                id="inactifEntreMax2" 
-                                style="width:100%" 
-                                formControlName="inactifEntreMax2">
-                            </div> 
-                        </label>
-                    </div>  
-                    
-            </div>
 
 
     </div>
