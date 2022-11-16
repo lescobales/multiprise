@@ -19,6 +19,7 @@ export class DateComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
+    this.dateForm.patchValue({onOff: false})
 
   }
 

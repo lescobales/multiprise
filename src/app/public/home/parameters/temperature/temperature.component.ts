@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { PriseService } from 'src/app/core/services/prise.service';
-import { SensorTemperature } from 'src/app/shared/models/sensor';
 
 @Component({
   selector: 'mltp-temperature',
